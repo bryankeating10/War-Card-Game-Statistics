@@ -1,7 +1,7 @@
 from typing import Dict, Any
 import pandas as pd
-from game import play_game
-from analysis import analyze_results
+from src.game import play_game
+from src.analysis import analyze_results
 
 
 def run_simulation(num_games: int = 10000, verbose: bool = True) -> Dict[str, Any]:
