@@ -22,7 +22,6 @@ def analyze_results(all_game_stats: List[Dict[str, Any]]) -> Dict[str, Any]:
             'wars': {},
             'double_wars': {},
             'winners': {},
-            'max_stacks': {},
             'correlation_wars_rounds': None,
             'infinite_games': {
                 'count': len(infinite_games),
@@ -34,8 +33,6 @@ def analyze_results(all_game_stats: List[Dict[str, Any]]) -> Dict[str, Any]:
     rounds = [g['rounds'] for g in finite_games]
     wars = [g['wars'] for g in finite_games]
     double_wars = [g['double_wars'] for g in finite_games]
-    max_stack_p1 = [g['max_stack_p1'] for g in finite_games]
-    max_stack_p2 = [g['max_stack_p2'] for g in finite_games]
 
     # Winner analysis (finite games only)
     p1_wins = sum(1 for g in finite_games if g['winner'] == 1)
@@ -82,14 +79,6 @@ def analyze_results(all_game_stats: List[Dict[str, Any]]) -> Dict[str, Any]:
             'player_2_wins': p2_wins,
             'player_1_win_percentage': (p1_wins / total_finite) * 100,
             'player_2_win_percentage': (p2_wins / total_finite) * 100,
-        },
-        'max_stacks': {
-            'p1_mean': statistics.mean(max_stack_p1),
-            'p1_median': statistics.median(max_stack_p1),
-            'p1_max': max(max_stack_p1),
-            'p2_mean': statistics.mean(max_stack_p2),
-            'p2_median': statistics.median(max_stack_p2),
-            'p2_max': max(max_stack_p2),
         },
         'infinite_games': {
             'count': total_infinite,
@@ -176,15 +165,6 @@ def print_summary(results: Dict[str, Any]) -> None:
         print("-" * 70)
         print(f"  Player 1 Wins:  {win['player_1_wins']:>10,} ({win['player_1_win_percentage']:>5.2f}%)")
         print(f"  Player 2 Wins:  {win['player_2_wins']:>10,} ({win['player_2_win_percentage']:>5.2f}%)")
-
-    # Stack stats
-    stacks = results.get('max_stacks', {})
-    if stacks:
-        print("\n" + "-" * 70)
-        print("MAX STACK SIZES")
-        print("-" * 70)
-        print(f"  P1 Mean:   {stacks['p1_mean']:>10.2f}   Median: {stacks['p1_median']:>10.2f}   Max: {stacks['p1_max']:>10,}")
-        print(f"  P2 Mean:   {stacks['p2_mean']:>10.2f}   Median: {stacks['p2_median']:>10.2f}   Max: {stacks['p2_max']:>10,}")
 
     # Correlation
     if 'correlation_wars_rounds' in results:

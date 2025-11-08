@@ -48,11 +48,7 @@ def play_round(p1_hand, p2_hand, stats):
             return False  # Game ended during war
     
     stats['rounds'] += 1
-    
-    # Track stack sizes
-    stats['p1_stack_sizes'].append(len(p1_hand))
-    stats['p2_stack_sizes'].append(len(p2_hand))
-    
+        
     # Check for max rounds (potential infinite game)
     if stats['rounds'] >= MAX_ROUNDS:
         stats['hit_max_rounds'] = True
@@ -142,17 +138,11 @@ def play_game():
         'wars': 0,
         'double_wars': 0,
         'winner': None,
-        'hit_max_rounds': False,
-        'p1_stack_sizes': [len(p1_hand)],  # Starting size
-        'p2_stack_sizes': [len(p2_hand)],
+        'hit_max_rounds': False
     }
     
     # Play until game ends
     while play_round(p1_hand, p2_hand, stats):
         pass
-    
-    # Add final statistics
-    stats['max_stack_p1'] = max(stats['p1_stack_sizes'])
-    stats['max_stack_p2'] = max(stats['p2_stack_sizes'])
     
     return stats

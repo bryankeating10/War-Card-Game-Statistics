@@ -51,9 +51,7 @@ def run_simulation(num_games: int = 10000, verbose: bool = True) -> Dict[str, An
             'wars': game['wars'],
             'double_wars': game['double_wars'],
             'winner': game['winner'],
-            'hit_max_rounds': game['hit_max_rounds'],
-            'max_stack_p1': game['max_stack_p1'],
-            'max_stack_p2': game['max_stack_p2'],
+            'hit_max_rounds': game['hit_max_rounds']
         }
         df_data.append(row)
     
