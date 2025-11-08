@@ -31,6 +31,11 @@ def main():
         action='store_true',
         help='Suppress progress messages'
     )
+    parser.add_argument(
+        '-o', '--output',
+        type=str,
+        help='Output CSV file path for game data (optional)'
+    )
     
     args = parser.parse_args()
     
@@ -40,8 +45,22 @@ def main():
         verbose=not args.quiet
     )
     
-    # Print results
-    print_summary(results)
+    # Print summary statistics
+    print_summary(results['summary'])
+    
+    # Save to CSV if requested
+    if args.output:
+        results['game_data'].to_csv(args.output)
+        print(f"\nGame data saved to: {args.output}")
+    
+    # Print DataFrame info
+    if not args.quiet:
+        print("\nDataFrame Info:")
+        print(f"Shape: {results['game_data'].shape}")
+        print(f"\nFirst few games:")
+        print(results['game_data'].head())
+        print(f"\nBasic statistics:")
+        print(results['game_data'].describe())
 
 
 if __name__ == "__main__":
