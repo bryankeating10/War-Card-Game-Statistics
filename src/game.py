@@ -2,7 +2,7 @@ from collections import deque
 from src.deck import create_deck, deal_cards
 
 # Constants
-MAX_ROUNDS = 100000  # Prevent infinite games
+MAX_ROUNDS = 3000  # Prevent infinite games
 WAR_CARDS_FACEDOWN = 3  # Standard war rules
 
 
