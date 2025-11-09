@@ -125,8 +125,6 @@ def play_game():
             - double_wars: number of wars during wars
             - winner: 1, 2, or None (if hit max rounds)
             - hit_max_rounds: bool indicating if game hit the limit
-            - p1_stack_sizes: list of player 1's stack size after each round
-            - p2_stack_sizes: list of player 2's stack size after each round
     """
     # Initialize game
     deck = create_deck()
